@@ -1,0 +1,47 @@
+<div>
+<nav class="navbar navbar-default navbar-fixed-top text-left" style="background-color:#64B5F6">
+  <h1 style="color:white; float:right">Dataset Manager</h1>
+</nav>
+</div>
+<div class="jumbotron" style="background-color:white">WAW</div>
+
+<div class="container" style="float:left">
+<div>
+  <div class="col">
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-primary" id="dropdownBasic0" ngbDropdownToggle>{{nameProyek}}</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic0">
+        <button *ngFor="let project of projects; let i = index" class="dropdown-item"
+        (click) = "getSurvey(project.id); getProjectName(project.name, project.status); removeTable();">{{project.name}} </button>
+      </div>
+    </div>
+  </div>
+
+<div>
+  <div class="col">
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{nameSurvey}}</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button *ngFor="let survey of surveys; let i = index" class="dropdown-item"
+        (click) = "getData(survey.id);getName(survey.name);getSurveyName(survey.name, survey.surveyType)">{{survey.name}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<section>
+<!-- <h3></h3> -->
+<p-dataTable [value]="records" [editable]="true" [reorderableColumns]="true" exportFilename={{name}} scrollable="true" scrollHeight="300px" [responsive]="true" [stacked]="stacked" (onEditComplete)="changeData($event)" #dt>
+
+  <p-header>{{name}}
+  </p-header>
+  
+  <p-column [editable]="true" [style]="{'width':'200px'}" editable="true" *ngFor="let header of headers" [field]="header.field" [header]="header.header" ></p-column>
+</p-dataTable>
+<div class="ui-helper-clearfix">
+  <button type="button" (click)="dt.exportCSV()" style="float:right">Export as Excell file <i class="fa fa-file-excel-o"></i></button>
+</div>
+</section>
+
+<!-- <button (click)="getDataTable(0)">hehe</button> -->
